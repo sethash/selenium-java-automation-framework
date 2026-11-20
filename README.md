@@ -1,90 +1,58 @@
-# selenium-java-automation-framework
+# Selenium Java Test Automation Framework — Portfolio Demo
 
-# Selenium Java Test Automation Framework
+A self-contained **QA automation portfolio sample** testing the public [SauceDemo](https://www.saucedemo.com/) demonstration store. This is an independently authored demonstration, **not a client engagement**.
 
-### UI Test Automation | Selenium WebDriver | Java | TestNG | Maven | Page Object Model
+## Tech stack
+Java 17 · Selenium WebDriver 4 · TestNG 7 · Maven · Page Object Model · GitHub Actions · Jenkins pipeline sample
 
-## Project Overview
+## Covered workflows
+- Valid login (smoke)
+- Invalid and locked-out user authentication (data-driven, two inputs)
+- Add backpack to cart and verify item
+- Complete checkout and verify confirmation (smoke)
 
-This project demonstrates a scalable and maintainable web test automation framework built using **Selenium WebDriver, Java, TestNG, and Maven**.
+There are **five test invocations** across four test methods, including the two DataProvider inputs.
 
-The framework follows industry-standard automation design principles, including the **Page Object Model (POM)**, reusable utilities, data-driven testing, and structured test reporting.
+## Prerequisites
+- JDK 17+
+- Maven 3.9+
+- Chrome or Firefox installed
+- Internet access to SauceDemo and, on first use, browser driver resolution via Selenium Manager
 
-It is designed to demonstrate practical test automation capabilities for real-world web applications.
-
-## Technology Stack
-
-| Technology | Purpose |
-|---|---|
-| Java | Automation programming |
-| Selenium WebDriver | Browser automation |
-| TestNG | Test execution and assertions |
-| Maven | Dependency management |
-| Page Object Model | Framework design |
-| Apache POI | Excel-based test data |
-| Extent Reports | HTML test reporting |
-| Git & GitHub | Version control |
-| Jenkins | CI/CD integration |
-
-## Key Features
-
-- Modular and maintainable automation framework
-- Page Object Model implementation
-- Cross-browser testing support
-- Data-driven testing using Excel
-- Reusable Selenium utilities
-- Explicit wait handling
-- TestNG assertions and test grouping
-- Screenshot capture on test failures
-- HTML execution reports
-- Maven-based test execution
-- CI/CD integration readiness
-
-## Project Structure
-
-```text
-Selenium-Java-Automation/
-│
-├── src/
-│   ├── main/java/
-│   │   ├── pages/
-│   │   │   ├── LoginPage.java
-│   │   │   └── DashboardPage.java
-│   │   └── utils/
-│   │       ├── DriverFactory.java
-│   │       ├── ConfigReader.java
-│   │       └── ExcelUtils.java
-│   │
-│   └── test/java/
-│       ├── base/
-│       │   └── BaseTest.java
-│       └── tests/
-│           ├── LoginTest.java
-│           └── DashboardTest.java
-│
-├── testdata/
-│   └── TestData.xlsx
-├── reports/
-├── screenshots/
-├── pom.xml
-├── testng.xml
-└── README.md
+## Run locally
+```bash
+mvn clean test
+mvn clean test -Dheadless=true
+mvn clean test -Dbrowser=firefox -Dheadless=true
 ```
 
-## Test Scenarios
+Run smoke tests only:
+```bash
+mvn test -Dgroups=smoke -Dheadless=true
+```
 
-The framework is structured to automate common functional testing scenarios.
+## Results
+- TestNG / Maven Surefire reports: `target/surefire-reports/`
+- Failure screenshots: `target/screenshots/`
+- GitHub Actions workflow: `.github/workflows/tests.yml`
+- Jenkins declarative pipeline: `Jenkinsfile` (requires configured `JDK17`, `Maven3`, browser installation)
 
-**Login Functionality**
-- Verify successful login with valid credentials
-- Validate error messages for invalid credentials
-- Verify mandatory field validations
-- Verify logout functionality
+## Framework structure
+```text
+src/test/java/com/portfolio/
+  base/BaseTest.java             browser setup and teardown
+  pages/LoginPage.java           login page object
+  pages/ProductsPage.java        products page object
+  pages/CartPage.java            cart page object
+  pages/CheckoutPage.java        checkout page object
+  tests/LoginTests.java          login tests and data provider
+  tests/ShoppingTests.java       cart and checkout tests
+  utils/Screenshots.java         failure screenshot helper
+src/test/resources/testng.xml    TestNG suite
+```
 
-**Dashboard Functionality**
-- Verify dashboard navigation
-- Validate displayed UI elements
-- Verify user-specific information
-
-**Regression Testing**
-- Execute automated regression suites
+## Notes
+- The site and demo credentials are public, supplied by SauceDemo for learning and testing.
+- This framework uses Selenium Manager for browser drivers; no hard-coded local driver paths.
+- Tests have not been executed in this delivery environment. Run locally or in CI and attach authentic reports to your Upwork portfolio.
+- Do not claim measured execution speed, coverage percentages, or production impact without evidence.

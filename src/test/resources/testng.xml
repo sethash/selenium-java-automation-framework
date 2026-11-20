@@ -1,0 +1,2 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Selenium Java Portfolio Suite" verbose="1"><test name="Web UI Regression"><classes><class name="com.portfolio.tests.LoginTests"/><class name="com.portfolio.tests.ShoppingTests"/></classes></test></suite>
